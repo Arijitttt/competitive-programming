@@ -1,0 +1,23 @@
+# Ignore all .exe files
+*.exe
+
+# Ignore object files
+*.o
+
+# Ignore backup files
+*.bak
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore logs
+*.log
+
+# Ignore directories
+build/
+dist/
+venv/
+
+# Ignore specific files
+config/local_settings.py

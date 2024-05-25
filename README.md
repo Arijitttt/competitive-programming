@@ -26,7 +26,7 @@ To use the project, follow these steps:
 
 ## Credits
 
-This project was created by [Your Name].
+This repo was created by Arijit Bhattacharya.
 
 ## License
 

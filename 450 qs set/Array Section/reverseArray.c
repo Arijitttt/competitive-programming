@@ -16,3 +16,5 @@ int main(){
 	printf("%d\n",length);
 	reverseArray(arr,length);
 }
+
+//time complexity = O(log n)

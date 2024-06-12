@@ -12,6 +12,7 @@ int areRotations(char* s1, char* s2) {
     char temp[len1 * 2];
     strcpy(temp, s1);
     strcat(temp, s1);
+    
 
     if (strstr(temp, s2) != NULL) {
         return 1; // Strings are rotations of each other

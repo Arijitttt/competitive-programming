@@ -169,6 +169,32 @@ class DoublyLinkedList:
                 nxt = cur.next
                 self.delete_node(cur)
                 cur = nxt
+
+    def insert_sorted(self,data):
+        new_node = self.head
+        if self.head is None:
+            new_node = self.head
+            return
+        if data < self.head.data:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+            return
+        
+
+        cur  = self.head
+        while cur.next and cur.data < data:
+            cur = cur.next
+        if cur.next is None and cur.data<data:
+            cur.next = new_node
+            new_node.prev= cur
+        else:
+            prev = cur.prev
+            prev.next = new_node
+            new_node.prev = prev
+            new_node.next = cur
+            cur.prev = new_node
+
     def print_list(self):
         cur  = self.head
         while cur:

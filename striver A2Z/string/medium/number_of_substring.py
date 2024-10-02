@@ -1,14 +1,31 @@
-def subStrCount(s):
-    if len(s) ==0:
-        return []
-    elif len(s) == 1:
-        return [s]
-    else:
-        output = []
-        for i in range(len(s)):
-            for j in range(i+1,len(s)+1):
-                output.append(s[i:j])
-    return output+subStrCount(s[1:])
+from collections import defaultdict
 
-s = 'geeksforgeeks'
-print(subStrCount(s))
+def countDist(s, k):
+    # Helper function to count substrings with at most K distinct characters
+    def atMostKDistinct(s, k):
+        left = 0
+        count = 0
+        freq = defaultdict(int)
+        
+        for right in range(len(s)):
+            # Add the current character to the frequency map
+            freq[s[right]] += 1
+            
+            # Shrink the window if it has more than K distinct characters
+            while len(freq) > k:
+                freq[s[left]] -= 1
+                if freq[s[left]] == 0:
+                    del freq[s[left]]
+                left += 1
+            
+            # Add the number of valid substrings in the current window
+            count += right - left + 1
+        
+        return count
+    
+    # Calculate the number of substrings with exactly K distinct characters
+    return atMostKDistinct(s, k) - atMostKDistinct(s, k - 1)
+
+s= 'abaaca'
+k = 1
+print(countDist(s,k))

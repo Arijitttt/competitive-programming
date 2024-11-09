@@ -1,4 +1,20 @@
 from collections import deque
+class Stack(object):
+    def __init__(self):
+        self.arr = []
+    def push(self,item):
+        self.arr.append(item)
+    def pop(self):
+        if not self.is_empty():
+            return self.arr.pop()
+    def is_empty(self):
+        return len(self.arr) == 0
+    def peek(self):
+        if not self.is_empty():
+            return self.arr[-1]
+    def size(self):
+        return len(self.arr)
+    
 class Queue(object):
     def __init__(self):
         self.arr = deque()
@@ -32,7 +48,8 @@ class BinaryTree(object):
             return self.postOtder(tree.root,'')
         elif traversal_type == 'levelorder':
             return self.levelOrder(tree.root)
-        
+        elif traversal_type == 'reverselevelorder':
+            return self.reverse_levelOrder(tree.root)
     def preOrder(self,start,traversal):
         #root left right
         if start:
@@ -71,6 +88,30 @@ class BinaryTree(object):
             if node.right:
                 queue.enqueue(node.right)
         return traversal
+    
+    def reverse_levelOrder(self, start):
+        if start is None:
+            return
+
+        queue = Queue()
+        stack = Stack()
+        queue.enqueue(start)
+        traversal = ''  # Initialize an empty string here
+
+        while queue.length() > 0:
+            node = queue.deque()
+            stack.push(node)
+            if node.right:
+                queue.enqueue(node.right)
+            if node.left:
+                queue.enqueue(node.left)
+
+        while stack.size() > 0:
+            node = stack.pop()
+            traversal += str(node.value) + '-'
+
+        return traversal
+
 tree = BinaryTree(1)
 tree.root.left = Node(2)
 tree.root.right = Node(3)
@@ -83,3 +124,4 @@ print(tree.print_tree('preorder'))
 print(tree.print_tree('inorder'))
 print(tree.print_tree('postorder'))
 print(tree.print_tree('levelorder'))
+print(tree.print_tree('reverselevelorder'))
